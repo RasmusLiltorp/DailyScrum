@@ -21,7 +21,7 @@ public class IntegrationTests
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            connStr = config.GetConnectionString("DefaultConnection");
+            connStr = config.GetConnectionString("SupabaseConnection");
         }
 
         Assert.That(connStr, Is.Not.Null.And.Not.Empty,

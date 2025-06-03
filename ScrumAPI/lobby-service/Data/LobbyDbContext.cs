@@ -8,4 +8,5 @@ public class LobbyDbContext : DbContext
     public LobbyDbContext(DbContextOptions<LobbyDbContext> options) : base(options) { }
     
     public DbSet<Lobby> Lobbies { get; set; }
+    public DbSet<Entry> Entries { get; set; }
 }

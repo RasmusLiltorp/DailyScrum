@@ -24,7 +24,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("FrontendOnly", policy =>
     {
-        policy.WithOrigins("https://PLACEHOLDERFORWHENFRONTENDISUP.com")
+        policy.WithOrigins("http://localhost:3001")
             .AllowAnyMethod()
             .AllowAnyHeader();
     });

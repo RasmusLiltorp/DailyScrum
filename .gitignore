@@ -1,3 +1,5 @@
+appsettings.json
+
 # Created by https://www.toptal.com/developers/gitignore/api/jetbrains+all,intellij+all,jetbrains
 # Edit at https://www.toptal.com/developers/gitignore?templates=jetbrains+all,intellij+all,jetbrains
 
@@ -450,3 +452,5 @@ thumb
 sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/dotnetcore,react,nextjs,java,node
+
+appsettings.json

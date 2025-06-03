@@ -1,5 +1,6 @@
 ﻿using LobbyService.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace LobbyService.Controllers;
 
@@ -15,6 +16,7 @@ public class LobbyController : ControllerBase
     }
 
     [HttpPost]
+    [EnableRateLimiting("PerIpPolicy")]
     public async Task<IActionResult> CreateLobby()
     {
         var lobby = await _lobbyService.CreateLobbyAsync();
@@ -22,6 +24,8 @@ public class LobbyController : ControllerBase
     }
 
     [HttpGet("{code}")]
+    [EnableRateLimiting("PerIpPolicy")]
+
     public async Task<IActionResult> GetLobby(string code)
     {
         var lobby = await _lobbyService.GetLobbyAsync(code);
@@ -29,6 +33,7 @@ public class LobbyController : ControllerBase
     }
 
     [HttpPost("{code}/entries")]
+    [EnableRateLimiting("PerIpPolicy")]
     public async Task<IActionResult> AddEntry(string code, [FromBody] CreateEntryDTO dto)
     {
         var lobby = await _lobbyService.GetLobbyAsync(code);

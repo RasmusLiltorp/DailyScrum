@@ -35,3 +35,12 @@ Team members join a temporary **lobby via code** and submit:
 | Backend     | [ASP.NET Core Web API](https://learn.microsoft.com/en-us/aspnet/core/) + C# |
 | Database    | [Supabase PostgreSQL](https://supabase.com/) |
 | ORM         | Entity Framework Core |
+
+## 🔐 CAPTCHA Setup
+
+To enable CAPTCHA protection when creating a lobby you must configure a Google reCAPTCHA v3 site key and secret.
+
+Set the following environment variables before running the app:
+
+- `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` – your public site key used on the frontend
+- `CAPTCHA_SECRET_KEY` – the matching secret key used by the API

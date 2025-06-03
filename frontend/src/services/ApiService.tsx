@@ -101,7 +101,7 @@ export const ApiService = {
     }
   },
   
-  createLobby: async (): Promise<Lobby> => {
+  createLobby: async (captchaToken: string): Promise<Lobby> => {
     if (typeof window !== 'undefined' && !ApiService.canCreateLobby()) {
       throw new Error('You can only create one lobby per minute. Please try again later.');
     }
@@ -111,6 +111,7 @@ export const ApiService = {
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ captchaToken }),
     });
 
     if (!response.ok) {

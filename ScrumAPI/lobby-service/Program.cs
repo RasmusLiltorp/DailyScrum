@@ -13,6 +13,7 @@ builder.Services.AddDbContext<LobbyDbContext>(options =>
 builder.Services.AddScoped<LobbyService.Services.LobbyService>();
 builder.Services.AddScoped<CodeService>();
 builder.Services.AddScoped<ConnectionChecker>();
+builder.Services.AddHttpClient<CaptchaService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

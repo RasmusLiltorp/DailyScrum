@@ -11,6 +11,7 @@ export default function ClientHero() {
   const [error, setError] = useState<string | null>(null);
   const [canCreate, setCanCreate] = useState<boolean>(true);
   const [countdown, setCountdown] = useState<number>(0);
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   useEffect(() => {
     const recentLobby = ApiService.getRecentLobby();
@@ -45,16 +46,35 @@ export default function ClientHero() {
     return () => clearInterval(interval);
   };
 
+  const getCaptchaToken = (): Promise<string> => {
+    return new Promise((resolve) => {
+      if (typeof window === 'undefined' || !(window as any).grecaptcha || !siteKey) {
+        resolve('');
+        return;
+      }
+
+      (window as any).grecaptcha.ready(() => {
+        (window as any).grecaptcha
+          .execute(siteKey, { action: 'create_lobby' })
+          .then((token: string) => {
+            resolve(token);
+          })
+          .catch(() => resolve(''));
+      });
+    });
+  };
+
   const createLobby = async () => {
     setIsCreatingLobby(true);
     setError(null);
-    
+
     try {
       if (!ApiService.canCreateLobby()) {
         throw new Error('You can only create one lobby per minute.');
       }
-      
-      const lobby = await ApiService.createLobby();
+
+      const token = await getCaptchaToken();
+      const lobby = await ApiService.createLobby(token);
       setLobbyCode(lobby.code);
       setCanCreate(false);
       startCountdown();

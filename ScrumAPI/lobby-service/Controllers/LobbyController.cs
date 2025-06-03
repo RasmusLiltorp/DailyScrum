@@ -9,16 +9,24 @@ namespace LobbyService.Controllers;
 public class LobbyController : ControllerBase
 {
     private readonly Services.LobbyService _lobbyService;
+    private readonly Services.CaptchaService _captchaService;
 
-    public LobbyController(Services.LobbyService lobbyService)
+    public LobbyController(Services.LobbyService lobbyService, Services.CaptchaService captchaService)
     {
         _lobbyService = lobbyService;
+        _captchaService = captchaService;
     }
 
     [HttpPost]
     [EnableRateLimiting("PerIpPolicy")]
-    public async Task<IActionResult> CreateLobby()
+    public async Task<IActionResult> CreateLobby([FromBody] CreateLobbyDTO dto)
     {
+        var isValid = await _captchaService.VerifyTokenAsync(dto.CaptchaToken);
+        if (!isValid)
+        {
+            return BadRequest(new { message = "Invalid CAPTCHA" });
+        }
+
         var lobby = await _lobbyService.CreateLobbyAsync();
         return Ok(lobby);
     }

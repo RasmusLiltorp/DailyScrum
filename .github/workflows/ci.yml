@@ -20,6 +20,16 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
+      - name: Check SUPABASE_CONNECTION_STRING environment variable
+        run: |
+          echo "SUPABASE_CONNECTION_STRING=${SUPABASE_CONNECTION_STRING}"
+          if [ -z "${SUPABASE_CONNECTION_STRING}" ]; then
+            echo "Error: SUPABASE_CONNECTION_STRING is not set."
+            exit 1
+          else
+            echo "Connection string detected."
+          fi
+            
       - name: Restore dependencies
         run: dotnet restore
         working-directory: ScrumAPI/lobby-service.Tests

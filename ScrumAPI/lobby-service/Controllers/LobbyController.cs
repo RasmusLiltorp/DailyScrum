@@ -29,6 +29,12 @@ public class LobbyController : ControllerBase
     public async Task<IActionResult> GetLobby(string code)
     {
         var lobby = await _lobbyService.GetLobbyAsync(code);
+
+        if (lobby == null)
+        {
+            return NotFound();
+        }
+
         return Ok(lobby);
     }
 

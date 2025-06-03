@@ -18,8 +18,6 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - run: echo "ConnString starts with ${SUPABASE_CONNECTION_STRING:0:25}…"
-
       - name: Restore
         run: dotnet restore
         working-directory: ScrumAPI/lobby-service.Tests

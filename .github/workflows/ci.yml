@@ -32,7 +32,7 @@ jobs:
 
       - name: Test connection to Supabase
         run: |
-          nc -zv db.xyz.supabase.co 5432 || exit 1
+          nc -zv db.sylkuafgizfucpdgpblm.supabase.co 5432 || exit 1
             
       - name: Restore dependencies
         run: dotnet restore

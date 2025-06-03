@@ -30,10 +30,10 @@ jobs:
             echo "Connection string detected."
           fi
 
-      - name: Test connection to Supabase
+      - name: Test connection with curl
         run: |
-          nc -zv db.sylkuafgizfucpdgpblm.supabase.co 5432 || exit 1
-            
+          curl -v telnet://db.sylkuafgizfucpdgpblm.supabase.co:5432 || exit 1
+
       - name: Restore dependencies
         run: dotnet restore
         working-directory: ScrumAPI/lobby-service.Tests

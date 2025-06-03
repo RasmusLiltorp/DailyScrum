@@ -22,12 +22,12 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore
-        working-directory: ScrumAPI
+        working-directory: ScrumAPI/lobby-service.Tests
 
       - name: Build
         run: dotnet build --no-restore
-        working-directory: ScrumAPI
+        working-directory: ScrumAPI/lobby-service.Tests
 
       - name: Run tests
         run: dotnet test --no-build --verbosity normal
-        working-directory: ScrumAPI
+        working-directory: ScrumAPI/lobby-service.Tests

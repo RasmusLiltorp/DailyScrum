@@ -29,6 +29,10 @@ jobs:
           else
             echo "Connection string detected."
           fi
+
+      - name: Test connection to Supabase
+        run: |
+          nc -zv db.xyz.supabase.co 5432 || exit 1
             
       - name: Restore dependencies
         run: dotnet restore

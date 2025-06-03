@@ -34,11 +34,21 @@ public class IntegrationTests
         var context = new LobbyDbContext(options);
         _checker = new ConnectionChecker(context);
     }
-
+    
     [Test]
     public async Task CanConnectToSupabase()
     {
-        var result = await _checker.CanConnectAsync();
-        Assert.That(result, Is.True, "Could not connect to Supabase");
+        try
+        {
+            Console.WriteLine("Attempting to connect to Supabase");
+            var result = await _checker.CanConnectAsync();
+            Assert.That(result, Is.True, "Could not connect to Supabase");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception during connection attempt: {ex.Message}");
+            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+            Assert.Fail($"Connection test failed with exception: {ex.Message}");
+        }
     }
 }

@@ -12,29 +12,15 @@ env:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
-
       - uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.0.x'
 
-      - name: Check SUPABASE_CONNECTION_STRING environment variable
-        run: |
-          echo "SUPABASE_CONNECTION_STRING=${SUPABASE_CONNECTION_STRING}"
-          if [ -z "${SUPABASE_CONNECTION_STRING}" ]; then
-            echo "Error: SUPABASE_CONNECTION_STRING is not set."
-            exit 1
-          else
-            echo "Connection string detected."
-          fi
+      - run: echo "ConnString starts with ${SUPABASE_CONNECTION_STRING:0:25}…"
 
-      - name: Test connection with curl
-        run: |
-          curl -v telnet://db.sylkuafgizfucpdgpblm.supabase.co:5432 || exit 1
-
-      - name: Restore dependencies
+      - name: Restore
         run: dotnet restore
         working-directory: ScrumAPI/lobby-service.Tests
 
@@ -42,6 +28,6 @@ jobs:
         run: dotnet build --no-restore
         working-directory: ScrumAPI/lobby-service.Tests
 
-      - name: Run tests
+      - name: Test
         run: dotnet test --no-build --verbosity normal
         working-directory: ScrumAPI/lobby-service.Tests

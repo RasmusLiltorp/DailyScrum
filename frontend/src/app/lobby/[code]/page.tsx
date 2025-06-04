@@ -40,7 +40,7 @@ export default function LobbyPage() {
                 </svg>
                 Ready to share your update?
               </h2>
-              <p className="mb-4">Let your team know what you've been working on</p>
+              <p className="mb-4">Let your team know what you&apos;ve been working on</p>
               <button 
                 className="btn btn-accent btn-lg" 
                 onClick={() => setShowEntryForm(true)}

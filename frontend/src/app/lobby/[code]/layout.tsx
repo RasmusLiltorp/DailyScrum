@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Daily Standup Lobby | DailyScrum",
   description: "Participate in your team's daily standup meeting",
 };
 
-export default function LobbyLayout({
+export default async function LobbyLayout({
   children,
   params,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-  params: { code: string };
-}>) {
+  params: Promise<{ code: string }>;
+}) {
+  const { code } = await params;
+  
   return (
     <div className="min-h-screen bg-base-200">
       <div className="bg-base-100 shadow-sm">
@@ -19,12 +22,11 @@ export default function LobbyLayout({
           <div className="flex items-center justify-between">
             <div className="text-sm breadcrumbs">
               <ul>
-                <li><a href="/">Home</a></li>
+                <li><Link href="/">Home</Link></li>
                 <li>Lobby</li>
-                <li className="font-mono">{params.code}</li>
+                <li className="font-mono">{code}</li>
               </ul>
             </div>
-            
             <div className="text-xs opacity-60 flex items-center gap-2">
               <div className="loading loading-ring loading-xs"></div>
               Auto-refreshing
@@ -32,11 +34,8 @@ export default function LobbyLayout({
           </div>
         </div>
       </div>
-      
-      <main className="pb-8">
-        {children}
-      </main>
-    
+
+      <main className="pb-8">{children}</main>
     </div>
   );
 }

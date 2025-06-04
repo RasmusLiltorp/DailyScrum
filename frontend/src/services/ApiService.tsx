@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5237/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 export interface Lobby {
   id: string;
@@ -56,7 +56,7 @@ const handleApiError = async (response: Response): Promise<never> => {
   try {
     const errorData = await response.json();
     errorMessage = errorData.message || `Server returned ${response.status}`;
-  } catch (e) {
+  } catch {
     errorMessage = `Server returned ${response.status}`;
   }
   console.error('API Error:', errorMessage);
@@ -95,7 +95,7 @@ export const ApiService = {
         deleteCookie(LOBBY_COOKIE_NAME);
         return null;
       }
-    } catch (e) {
+    } catch {
       deleteCookie(LOBBY_COOKIE_NAME);
       return null;
     }

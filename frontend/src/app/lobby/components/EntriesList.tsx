@@ -52,7 +52,7 @@ export default function EntriesList({
             Be the first team member to share your daily standup update!
           </p>
           <div className="text-sm text-base-content/40">
-            Click the "Share Your Update" button above to get started
+            Click the &quot;Share Your Update&quot; button above to get started
           </div>
         </div>
       </div>

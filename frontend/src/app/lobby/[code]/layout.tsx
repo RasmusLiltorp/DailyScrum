@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Daily Standup Lobby | DailyScrum",
+  title: "Lobby",
   description: "Participate in your team's daily standup meeting",
 };
 

@@ -21,8 +21,8 @@ Team members join a temporary **lobby via code** and submit:
 - 🔑 No login required
 - 🎯 Kahoot-style lobby codes
 - 👥 See everyone's entries in one place
-- 🔒 Auto-deletion of all data after 2 hours
-- 🛡️ Rate limiting & CAPTCHA protection against spam
+- 🔒 Auto-deletion of all data after 2 hours (Cron-jobs)
+- 🛡️ Rate limiting for protection against spam
 - ⚡ Minimalist UI built with Tailwind + DaisyUI
 
 ---
